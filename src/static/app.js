@@ -19,15 +19,52 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
+        let availabilityClass = "availability";
+        
+        if (spotsLeft === 0) {
+          availabilityClass += " full";
+        } else if (spotsLeft <= 3) {
+          availabilityClass += " limited";
+        }
+
+        // Create participant list HTML
+        const participantsList = document.createElement("div");
+        participantsList.className = "participant-list";
+        
+        const participantHeader = document.createElement("h5");
+        participantHeader.innerHTML = `参加者リスト <span class="count">${details.participants.length}</span>`;
+        participantsList.appendChild(participantHeader);
+        
+        const participantUl = document.createElement("ul");
+        if (details.participants.length > 0) {
+          details.participants.forEach(participant => {
+            const li = document.createElement("li");
+            li.textContent = participant;
+            participantUl.appendChild(li);
+          });
+        } else {
+          const li = document.createElement("li");
+          li.textContent = "まだ参加者はいません";
+          li.style.fontStyle = "italic";
+          li.style.color = "#999";
+          participantUl.appendChild(li);
+        }
+        participantsList.appendChild(participantUl);
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
-          <p><strong>Schedule:</strong> ${details.schedule}</p>
-          <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <p><strong>スケジュール:</strong> ${details.schedule}</p>
+          <p class="${availabilityClass}">残り ${spotsLeft} 席</p>
         `;
-
+        
+        activityCard.appendChild(participantsList);
         activitiesList.appendChild(activityCard);
+
+        // アニメーション効果を追加
+        setTimeout(() => {
+          activityCard.style.opacity = "1";
+        }, 100);
 
         // Add option to select dropdown
         const option = document.createElement("option");
@@ -36,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         activitySelect.appendChild(option);
       });
     } catch (error) {
-      activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
+      activitiesList.innerHTML = "<p>アクティビティの読み込みに失敗しました。後でもう一度お試しください。</p>";
       console.error("Error fetching activities:", error);
     }
   }
