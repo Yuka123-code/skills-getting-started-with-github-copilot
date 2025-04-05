@@ -58,32 +58,102 @@ section h3 {
 }
 
 .activity-card {
-  margin-bottom: 15px;
-  padding: 15px;
+  margin-bottom: 20px;
+  padding: 20px;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .activity-card h4 {
-  margin-bottom: 10px;
-  color: #0066cc;
+  margin-bottom: 12px;
+  color: #1a237e;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 8px;
 }
 
 .activity-card p {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  color: #424242;
+  line-height: 1.5;
 }
 
-.activity-card ul {
+.participant-list {
+  background-color: #f5f7fa;
+  border-radius: 6px;
+  padding: 12px 15px;
   margin-top: 10px;
-  padding-left: 20px;
-  list-style-type: disc;
 }
 
-.activity-card ul li {
-  margin-bottom: 5px;
-  color: #555;
-  font-size: 14px;
+.participant-list h5 {
+  color: #1a237e;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.participant-list h5 .count {
+  background-color: #1a237e;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.participant-list ul {
+  list-style-type: none;
+}
+
+.participant-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+}
+
+.participant-list li:last-child {
+  border-bottom: none;
+}
+
+.participant-list li::before {
+  content: "•";
+  color: #1a237e;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-right: 6px;
+}
+
+.availability {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.availability.limited {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.availability.full {
+  background-color: #ffebee;
+  color: #c62828;
 }
 
 .form-group {
